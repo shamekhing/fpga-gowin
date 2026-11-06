@@ -16,6 +16,17 @@ This skill covers the repeatable parts of FPGA work: setting up a project, build
 5. Program with `scripts/program_board.sh impl/pnr/<design>.fs` and confirm the LED blinks before adding any design.
 6. Run `scripts/verify_build.sh <output_base_name>` after every build. A build is not verified until it passes.
 7. Before a review or a commit, run `scripts/check_naming.sh rtl` and fix each finding that applies.
+8. Whenever a new RTL source file is created, add it to the Gowin project's
+   `.gprj` `FileList` with the correct `type` and `enable="1"` entry before
+   synthesis or commit. Verify the file appears exactly once in the project
+   file and is included by the simulation/lint source list.
+9. Never create, amend, or otherwise modify a git commit unless the user
+   explicitly asks for a commit. Leave validated changes in the worktree by
+   default.
+10. After every code, RTL, project-file, constraint, simulation, or workflow
+    change, update the project's README before considering the task complete.
+    The README must describe the changed behavior, files, commands, and
+    verification status as applicable.
 
 Start a new project with `scripts/new_project.sh <dir> <top_module>`.
 

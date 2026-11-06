@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.23
+- Added a mandatory README maintenance rule: update the project README after
+  every code, RTL, project-file, constraint, simulation, or workflow change.
+
+## 1.22
+- Added a mandatory no-auto-commit rule: never create, amend, or modify commits
+  unless the user explicitly requests a commit.
+
+## 1.21
+- Added a mandatory project-integration check: every newly created SystemVerilog
+  or Verilog file must be registered exactly once in the Gowin `.gprj`
+  `FileList` and included in simulation/lint sources before synthesis or commit.
+
 ## 1.0
 - Initial skill built from the FPGA chat export (stage 1 to stage 3 consolidation).
 - Covers Gowin EDA build settings, openFPGALoader programming, Icarus and Verilator checks, git workflow, pitfalls and pipelines.
