@@ -127,8 +127,10 @@ As a worked calculation, a 784-input, 128-hidden layer at 4-bit weights needs:
 ```
 
 The output weights add `128 * 10 * 4 = 5,120 bits`. If stored in block RAM,
-these need at least 11 and 1 blocks respectively when using 36-Kbit blocks
-(36,864 bits each; `401,408 / 36,864 = 10.9`, so 11 blocks minimum). Exact
+these need at least 22 and 1 nominal blocks respectively when using 18-Kbit blocks
+(18,432 bits each; `401,408 / 18,432 = 21.8`, so 22 blocks minimum). This is
+a capacity-only lower bound; actual width/depth modes and port requirements can
+change the mapped count. Exact
 packing depends on the device and inference mode. A parallel hidden
 layer needs at least `128 * 16 = 2,048` membrane state bits before accounting
 for spike flags, scheduler state, counters, and control logic. A

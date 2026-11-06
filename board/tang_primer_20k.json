@@ -1,0 +1,22 @@
+{
+  "board": "Sipeed Tang Primer 20K",
+  "fpga_family": "Gowin GW2A",
+  "fpga_part": "GW2A-18C",
+  "resources": {
+    "lut4": 20736,
+    "flip_flops": 15552,
+    "ssram_bits": 41472,
+    "bsram_blocks": 46,
+    "bsram_nominal_bits_per_block": 18432,
+    "bsram_total_bits_nominal_from_block_count": 847872,
+    "multiplier_18x18_units": 48,
+    "pll_units": 4,
+    "io_banks": 8
+  },
+  "notes": [
+    "Resource figures are transcribed from the board/device specifications supplied with this project and must be checked against the exact FPGA part datasheet and current vendor documentation before final budgeting.",
+    "The 828 Kbit aggregate is consistent with 46 x 18 Kibit when K denotes 1024. Confirm the vendor datasheet convention for the exact device part.",
+    "This file is a planning reference, not a machine-verified device database.",
+    "Board pin assignments, I/O bank voltages, oscillator frequency and connector wiring are intentionally omitted until verified against the board schematic and revision."
+  ]
+}

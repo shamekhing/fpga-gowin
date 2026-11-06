@@ -67,7 +67,7 @@
 
 ## 1.13
 - Reviewed the uploaded revision (1.9 to 1.12) and kept its changes.
-- Corrected the BSRAM estimate in synthesize_route.md: 401,408 bits needs at least 11 x 36-Kbit blocks, not 12.
+- Historical note: this earlier estimate incorrectly used 36-Kbit blocks. Corrected in 1.19 to the nominal 18-Kbit B-SRAM capacity documented for the Tang Primer 20K configuration.
 - Marked the skeleton-build numbers in synthesize_route.md as a worked example, not a general rule.
 - Renamed the README title to match the skill name.
 
@@ -87,3 +87,18 @@
 - Added references/naming_conventions.md, generalized from the project document (project name and examples removed).
 - Added scripts/check_naming.sh, which flags mechanically checkable violations. Tested: conforming sample passes, violating sample gives 7 findings and exit 1.
 - Renamed the testbench template to led_blink_top_tb.sv with module led_blink_top_tb, to follow the _tb suffix rule. new_project.sh updated to match.
+
+## 1.18
+- Added references/minimal_resource_design.md: time-multiplexing, block RAM for state, synchronous RAM inference, measured width sizing, cheap arithmetic, and a change-measure loop. Each rule cites a source; Gowin-specific RAM rules are marked unverified.
+
+## 1.19
+- Added RTL design patterns, clocking/CDC, memory architecture and DSP/fixed-point references.
+- Added accelerator references for MAC arrays, neural networks, SNN/LIF, quantization, dataflow and performance estimation.
+- Added verification references for strategy, self-checking benches, reference models, assertions, randomized testing, formal methods and hardware validation.
+- Added interface references for UART, SPI, I2C, ready/valid and external-device links.
+- Added RTL, CDC, memory-inference and hardware-debug pipelines plus review/validation checklists.
+- Added specialized role guides for RTL architecture, implementation, verification, synthesis analysis and hardware debugging.
+- Added `parse_gowin_reports.py` (keyword index, not a normalized report parser) and `estimate_memory.py` (capacity-only lower bound).
+- Corrected B-SRAM capacity arithmetic to nominal 18-Kbit blocks: 401,408 logical bits require at least 22 blocks by capacity alone. Actual mapping depends on supported primitive modes and port requirements.
+- Added a Tang Primer 20K planning resource JSON. It records the nominal 46 x 18 Kibit (828 Kibit) B-SRAM capacity and marks all board figures for confirmation against the exact device datasheet.
+- Updated SKILL.md routing and README coverage. New scripts are syntax-checked and locally smoke-tested; no Gowin installation or physical board was available for hardware validation.

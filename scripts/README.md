@@ -11,3 +11,6 @@
 | gowin_batch.sh | gw_sh batch build with explicit top module, SystemVerilog 2017, and the verified environment | 0 ok, 2 bad args or missing project, 3 GOWIN_HOME/TOP_MODULE or gw_sh missing, else gw_sh's code |
 
 Each script starts with a comment giving its usage. Test a script with `bash -n` and a known input before using it on a project.
+
+| parse_gowin_reports.py | Print lines containing common resource/timing/error keywords; not a normalized parser | 0 files readable, 1 missing/unreadable input |
+| estimate_memory.py | Calculate logical memory bits and a nominal block-capacity lower bound | 0 valid calculation, 2 invalid arguments |

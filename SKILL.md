@@ -1,6 +1,6 @@
 ---
 name: fpga-gowin
-description: FPGA development on Gowin GW2A-class devices (for example the Tang Primer 20K) with Gowin EDA, openFPGALoader, Icarus Verilog, Verilator and SystemVerilog RTL. Use for project setup, constraints, building bitstreams, programming boards, simulation, timing and synthesis errors, and git workflow for FPGA repos. Also use when the user mentions .cst, .sdc, .gprj, gw_sh, openFPGALoader, bitstream, place-and-route, or Gowin.
+description: FPGA engineering on Gowin devices, including SystemVerilog RTL architecture, verification, CDC, memory/DSP design, AI/SNN accelerators, Gowin EDA synthesis and place-and-route, openFPGALoader programming, Icarus Verilog, Verilator, board bring-up and hardware debugging. Use for project setup, constraints, resource estimation, timing, interfaces and FPGA implementation. Also use when the user mentions .cst, .sdc, .gprj, gw_sh, openFPGALoader, bitstream, place-and-route, or Gowin.
 ---
 
 # FPGA workflow (Gowin)
@@ -33,12 +33,22 @@ Start a new project with `scripts/new_project.sh <dir> <top_module>`.
 | Every terminal command used in the sessions, grouped by task | references/terminal_commands.md |
 | Starter files: LED blink RTL and testbench, build, SDC and CST templates | templates/ |
 | Naming rules for RTL, testbenches, scripts and docs | references/naming_conventions.md |
+| Designing for minimal LUT, register and block RAM use | references/minimal_resource_design.md |
 | Programming the board | references/toolchain_openfpgaloader.md |
 | Simulation and lint | references/toolchain_icarus.md |
-| Board pins, power, I/O | references/board_tang_primer_20k.md |
+| Board pins, power, I/O | references/board_tang_primer_20k.md and board/tang_primer_20k.json |
 | Known error messages and fixes | references/pitfalls.md |
 | Git workflow for FPGA repos | references/git_workflow.md |
-| Proving a result is real (reference models, baselines) | references/verification.md |
+| Proving a result is real (reference models, baselines) | references/verification.md and references/verification/ |
+| RTL coding patterns | references/rtl_design_patterns.md |
+| Clock domains and CDC | references/clocking_cdc.md and pipelines/debug_cdc.md |
+| Embedded/external memory | references/memory_architecture.md and pipelines/debug_memory_inference.md |
+| DSP and fixed-point arithmetic | references/dsp_architecture.md |
+| AI accelerator architecture | references/accelerators/ |
+| Peripheral interfaces | references/interfaces/ |
+| Hardware debugging | pipelines/debug_hardware.md |
+| Design review and synthesis readiness | checklists/ |
+| Specialized engineering roles | agents/ |
 
 ## Working rules
 
@@ -53,6 +63,9 @@ Start a new project with `scripts/new_project.sh <dir> <top_module>`.
 9. Know the language mode. A SystemVerilog build with the tool in Verilog-2001 mode fails with syntax errors that look like source bugs.
 10. Sanity-check utilization against the intended architecture. A successful bitstream with near-zero LUT/register use and zero expected memories usually means the top-level datapath is uninstantiated or optimized away.
 11. Estimate expected memory bits and state registers before accepting utilization. Reconcile the estimate with synthesis hierarchy and PNR totals; low resources must have an explicit architectural explanation.
+12. For CDC, memory and DSP questions, load the corresponding reference before proposing RTL.
+13. Distinguish estimated, simulated, synthesized, timing-closed and hardware-validated results. Never promote one evidence level into another.
+14. Treat board JSON and remembered specifications as planning inputs only; verify the exact part, aggregate capacities, pinout and electrical limits against the matching datasheet and schematic.
 
 ## Environment checks
 
@@ -65,6 +78,15 @@ Before running a tool, confirm it exists and which version it is:
 (UNVERIFIED: these version and presence checks are suggestions. The chat showed `command -v` checks for gw_sh and yosys only.)
 
 If a path is read-only (for example a mounted .git), branch and commit commands fail. Check mount permissions before planning a branch-based workflow.
+
+## Engineering evidence levels
+
+Use these labels in reports:
+- **Estimated:** analytical calculation or architecture estimate.
+- **Simulated:** tested in a named simulator with a stated test count/result.
+- **Synthesized:** mapped by a named Gowin tool version; cite the report.
+- **Routed/timing-reviewed:** PNR completed and timing report inspected.
+- **Hardware-validated:** programmed and exercised on the identified board with recorded observations.
 
 ## Output expectations
 

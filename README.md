@@ -17,9 +17,13 @@ What this repo is: a reusable skill for FPGA work on Gowin devices (Tang Primer 
   - `toolchain_icarus.md`: simulation, lint, testbench hygiene.
   - `pitfalls.md`: errors ranked by counted frequency, each tagged with its source.
   - Extra files beyond the plan: `gowin_ide_cli.md` (IDE and programmer command line), `terminal_commands.md` (every terminal command used, grouped), `verification.md` (how to prove a result), `git_workflow.md`.
-- `pipelines/`: `new_project.md`, `add_module.md`, `debug_programming.md`, plus `debug_timing.md`.
-- `scripts/`: tested helpers (see below).
+- `pipelines/`: project creation, module addition, synthesis/route, timing, RTL, CDC, memory-inference and hardware debugging.
+- `scripts/`: repeatable helpers, including report keyword extraction and memory capacity estimation (see script documentation).
+- `checklists/`: RTL review, pre-synthesis and hardware validation gates.
+- `agents/`: role-specific procedures for architecture, RTL implementation, verification, synthesis analysis and hardware debugging.
+- `board/tang_primer_20k.json`: planning resource inventory with unresolved datasheet discrepancy explicitly recorded.
 - `templates/`: starter RTL (LED blink with a testbench that passes in Icarus), build Tcl, SDC and CST templates with placeholders.
+- `references/minimal_resource_design.md`: architecture and coding rules for minimal LUT, register and block RAM use, with sources.
 - `references/naming_conventions.md`: naming rules for RTL, testbenches, scripts and docs.
 - `CHANGELOG.md`: version history.
 
@@ -35,6 +39,18 @@ What this repo is: a reusable skill for FPGA work on Gowin devices (Tang Primer 
 | `scripts/gowin_batch.sh` | gw_sh batch build with the environment fixes | argument and GOWIN_HOME paths (exit 2, 3). Not run against a Gowin install |
 
 Scripts marked "not run" need your tools and board before they count as verified.
+
+## Added engineering coverage
+
+- RTL patterns, arithmetic sizing, handshakes and pipeline contracts.
+- Clock architecture, CDC, reset crossing and timing-constraint review.
+- Embedded memory inference, FIFO semantics and external DDR validation.
+- DSP/MAC and fixed-point design considerations.
+- Accelerator architecture, MAC arrays, quantization, SNN/LIF and performance estimation.
+- Interface guidance for UART, SPI, I2C, ready/valid and external MCU links.
+- Expanded verification strategy, self-checking testbenches, reference models, assertions, randomized tests, formal verification and hardware validation.
+
+New helper scripts are convenience tools and have not been validated against every Gowin report format or board configuration. Their output must be checked against the original report or datasheet.
 
 ## What is verified
 - Verification against the chat export: 38 commands and paths confirmed in the chat, 9 partial matches, 5 marked UNVERIFIED (see CHANGELOG 1.2).
