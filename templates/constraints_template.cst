@@ -1,0 +1,7 @@
+// constraints_template.cst -- take every location from the board schematic.
+// IO_LOC "<port>" <pin>;
+// IO_PORT "<port>" IO_TYPE=LVCMOS33;
+IO_LOC "clk" <CLK_PIN>;
+IO_PORT "clk" IO_TYPE=LVCMOS33;
+IO_LOC "led" <LED_PIN>;
+IO_PORT "led" IO_TYPE=LVCMOS33;
