@@ -120,7 +120,7 @@ output membrane bits = N_OUTPUT * POT_W
 output counter bits = N_OUTPUT * COUNTER_W
 ```
 
-As a worked calculation, a 784-input, 128-hidden layer at 4-bit weights needs:
+As a worked calculation, with `N_INPUT = 784`, `N_HIDDEN = 128` and 4-bit weights (generic example values, not a project spec):
 
 ```text
 784 * 128 * 4 = 401,408 bits

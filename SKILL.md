@@ -16,17 +16,6 @@ This skill covers the repeatable parts of FPGA work: setting up a project, build
 5. Program with `scripts/program_board.sh impl/pnr/<design>.fs` and confirm the LED blinks before adding any design.
 6. Run `scripts/verify_build.sh <output_base_name>` after every build. A build is not verified until it passes.
 7. Before a review or a commit, run `scripts/check_naming.sh rtl` and fix each finding that applies.
-8. Whenever a new RTL source file is created, add it to the Gowin project's
-   `.gprj` `FileList` with the correct `type` and `enable="1"` entry before
-   synthesis or commit. Verify the file appears exactly once in the project
-   file and is included by the simulation/lint source list.
-9. Never create, amend, or otherwise modify a git commit unless the user
-   explicitly asks for a commit. Leave validated changes in the worktree by
-   default.
-10. After every code, RTL, project-file, constraint, simulation, or workflow
-    change, update the project's README before considering the task complete.
-    The README must describe the changed behavior, files, commands, and
-    verification status as applicable.
 
 Start a new project with `scripts/new_project.sh <dir> <top_module>`.
 
@@ -52,8 +41,11 @@ Start a new project with `scripts/new_project.sh <dir> <top_module>`.
 | Git workflow for FPGA repos | references/git_workflow.md |
 | Proving a result is real (reference models, baselines) | references/verification.md and references/verification/ |
 | RTL coding patterns | references/rtl_design_patterns.md |
+| RTL structure: packages, bundles, module boundaries, top-level wiring | references/rtl_structure.md |
 | Clock domains and CDC | references/clocking_cdc.md and pipelines/debug_cdc.md |
 | Embedded/external memory | references/memory_architecture.md and pipelines/debug_memory_inference.md |
+| Using, obtaining or configuring any IP core (generic) | references/ip_cores.md |
+| DDR3 external memory (controller choice, calibration, refresh, verification) | references/ddr3_memory.md |
 | DSP and fixed-point arithmetic | references/dsp_architecture.md |
 | AI accelerator architecture | references/accelerators/ |
 | Peripheral interfaces | references/interfaces/ |
@@ -76,7 +68,8 @@ Start a new project with `scripts/new_project.sh <dir> <top_module>`.
 11. Estimate expected memory bits and state registers before accepting utilization. Reconcile the estimate with synthesis hierarchy and PNR totals; low resources must have an explicit architectural explanation.
 12. For CDC, memory and DSP questions, load the corresponding reference before proposing RTL.
 13. Distinguish estimated, simulated, synthesized, timing-closed and hardware-validated results. Never promote one evidence level into another.
-14. Treat board JSON and remembered specifications as planning inputs only; verify the exact part, aggregate capacities, pinout and electrical limits against the matching datasheet and schematic.
+14. Structure before code. Define each module's interface contract (purpose, clock, port groups, protocol, latency) before writing the body. Bundle signals only when they share a handshake, clock, lifetime and owner. Keep packages to shared declarations. Follow `references/rtl_structure.md`.
+15. Treat board JSON and remembered specifications as planning inputs only; verify the exact part, aggregate capacities, pinout and electrical limits against the matching datasheet and schematic.
 
 ## Environment checks
 

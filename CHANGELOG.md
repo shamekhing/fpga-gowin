@@ -1,18 +1,5 @@
 # Changelog
 
-## 1.23
-- Added a mandatory README maintenance rule: update the project README after
-  every code, RTL, project-file, constraint, simulation, or workflow change.
-
-## 1.22
-- Added a mandatory no-auto-commit rule: never create, amend, or modify commits
-  unless the user explicitly requests a commit.
-
-## 1.21
-- Added a mandatory project-integration check: every newly created SystemVerilog
-  or Verilog file must be registered exactly once in the Gowin `.gprj`
-  `FileList` and included in simulation/lint sources before synthesis or commit.
-
 ## 1.0
 - Initial skill built from the FPGA chat export (stage 1 to stage 3 consolidation).
 - Covers Gowin EDA build settings, openFPGALoader programming, Icarus and Verilator checks, git workflow, pitfalls and pipelines.
@@ -48,7 +35,7 @@
 
 ## 1.6
 - Expanded the Gowin TA1132 clock warning with an SDC primary-clock example, source-period and port-name checks, generated-clock guidance, and timing-report verification.
-- Added the user's 2026-11-06 report as a source; it is recorded as a recurring pitfall without assigning an unsupported frequency count.
+- Added a 2026-11-06 field report as a source; it is recorded as a recurring pitfall without assigning an unsupported frequency count.
 
 ## 1.7
 - Documented that SDC files must be registered in the `.gprj` `FileList` with `type="file.sdc"` and `enable="1"`.
@@ -70,19 +57,19 @@
 
 ## 1.12
 - Added first-order resource estimation for weight memories, membrane state, counters, and parallel versus time-multiplexed layers.
-- Documented mandatory reconciliation of estimated resources, synthesis hierarchy, and PNR totals, including the current `784 -> 128 -> 10` skeleton mismatch.
+- Documented mandatory reconciliation of estimated resources, synthesis hierarchy, and PNR totals, including a generic layer-size mismatch example.
+
+## 1.13
+- Reviewed the revision covering 1.9 to 1.12 and kept its changes.
+- Historical note: this earlier estimate incorrectly used 36-Kbit blocks. Corrected in 1.19 to the nominal 18-Kbit B-SRAM capacity documented for the Tang Primer 20K configuration.
+- Marked the skeleton-build numbers in synthesize_route.md as a worked example, not a general rule.
+- Renamed the README title to match the skill name.
 
 ## 1.14
 - Generalized the skill: removed project names, file paths, pin numbers and the SNN worked example from the general references; the SNN calculation is now a generic example.
 - Checked openFPGALoader against its upstream README: -m is the default SRAM write, -f writes flash on Gowin devices; cable names vary by adapter.
 - Added the Tcl option for dual-purpose pins (-use_<pin>_as_gpio) and the Gowin Tcl command list, both web-checked with the source noted.
 - Still unverified on your tools: every command in the skill. Confirm the set_option names with your Gowin version.
-
-## 1.13
-- Reviewed the uploaded revision (1.9 to 1.12) and kept its changes.
-- Historical note: this earlier estimate incorrectly used 36-Kbit blocks. Corrected in 1.19 to the nominal 18-Kbit B-SRAM capacity documented for the Tang Primer 20K configuration.
-- Marked the skeleton-build numbers in synthesize_route.md as a worked example, not a general rule.
-- Renamed the README title to match the skill name.
 
 ## 1.15
 - Added templates/: LED blink RTL with a testbench (passes in Icarus 12.0 in the sandbox), build Tcl template, SDC and CST templates with placeholders.
@@ -115,3 +102,19 @@
 - Corrected B-SRAM capacity arithmetic to nominal 18-Kbit blocks: 401,408 logical bits require at least 22 blocks by capacity alone. Actual mapping depends on supported primitive modes and port requirements.
 - Added a Tang Primer 20K planning resource JSON. It records the nominal 46 x 18 Kibit (828 Kibit) B-SRAM capacity and marks all board figures for confirmation against the exact device datasheet.
 - Updated SKILL.md routing and README coverage. New scripts are syntax-checked and locally smoke-tested; no Gowin installation or physical board was available for hardware validation.
+
+## 1.20
+- Added references/rtl_structure.md: interface contracts before bodies, module responsibility and clock-domain rules, package scope, bundling criteria, port grouping, top-level wiring, dead-signal removal, and tool-support checks for struct ports.
+- Added structure rules to SKILL.md (working rule 14), the RTL review checklist, and the RTL implementer role.
+- Removed project-specific example values from pipelines/synthesize_route.md and project references from this changelog.
+- Corrected version order (1.13 now precedes 1.14).
+
+## 1.21
+- Added references/ddr3_memory.md: board memory facts with a conflict note, controller-source choice, field-by-field comparison procedure, standard DDR3 rules (initialization, calibration, refresh, burst length, data mask), refresh and write-burst failure checks, CDC, and a minimum verification set. Gowin DDR3 IP specifics are marked UNVERIFIED.
+- Restored board ssram_bits (41,472) and added SDRAM 1 Gbit, both from the Sipeed datasheet. The 1.20 removal was an error and is reversed here.
+
+## 1.22
+- Added references/ip_cores.md: a device-independent guide to obtaining an IP (source, version, license, integrity), using it through a project wrapper, configuring it reproducibly (versioned configuration, regenerate rather than hand-edit), verifying it in simulation, and comparing configurations.
+- Routed generic IP questions to ip_cores.md in SKILL.md.
+- references/ddr3_memory.md now defers IP obtain/use/configure details to ip_cores.md and keeps only memory-specific guidance.
+

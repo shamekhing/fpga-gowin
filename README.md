@@ -1,6 +1,6 @@
 # fpga-gowin
 
-What this repo is: a reusable skill for FPGA work on Gowin devices (Tang Primer 20K / GW2A-18C class) with Gowin EDA, openFPGALoader, Icarus Verilog, Verilator and SystemVerilog RTL. It was distilled from about 180 AI coding sessions (Codex, Cline, Copilot Chat) in VS Code, covering roughly September to November 2026.
+What this repo is: a reusable skill for FPGA work on Gowin devices (Tang Primer 20K / GW2A-18C class) with Gowin EDA, openFPGALoader, Icarus Verilog, Verilator and SystemVerilog RTL. It was distilled from about 180 AI coding sessions (several AI coding-agent tools) in VS Code, covering roughly September to November 2026.
 
 ## How to use it
 1. Start with `SKILL.md`. It has a table of which file to read for each task.
@@ -11,6 +11,7 @@ What this repo is: a reusable skill for FPGA work on Gowin devices (Tang Primer 
 ## Layout (matches the original plan)
 - `SKILL.md`: entry point, task table, working rules.
 - `references/`
+  - `rtl_structure.md`: package scope, bundling rules, module boundaries, top-level wiring.
   - `board_tang_primer_20k.md`: board setup, pins, I/O, programming reliability.
   - `toolchain_gowin.md`: Gowin build settings, process config, reports, constraints.
   - `toolchain_openfpgaloader.md`: programming and detection.

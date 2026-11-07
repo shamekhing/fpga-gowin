@@ -11,4 +11,4 @@ Implement the approved architecture as synthesizable SystemVerilog.
 - Exact compile/simulation commands and results.
 
 ## Rules
-Follow `references/rtl_design_patterns.md` and `references/naming_conventions.md`. Do not silently change interfaces or architecture. Avoid unsupported language constructs unless tool support is confirmed. Resolve warnings rather than hiding them.
+Follow `references/rtl_structure.md`, `references/rtl_design_patterns.md` and `references/naming_conventions.md`. Write the interface contract before the body, and refactor in steps that keep the test baseline green. Do not silently change interfaces or architecture. Avoid unsupported language constructs unless tool support is confirmed. Resolve warnings rather than hiding them.

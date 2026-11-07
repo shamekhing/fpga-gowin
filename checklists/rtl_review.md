@@ -11,3 +11,11 @@
 - [ ] Memory/DSP inference is confirmed in synthesis reports.
 - [ ] Unit tests include boundaries and backpressure.
 - [ ] Lint warnings are resolved or justified.
+- [ ] Module header states purpose, clock domain, port groups, protocol and latency, and matches the code.
+- [ ] Each module has one responsibility and one clock domain.
+- [ ] Each struct bundle shares a handshake, clock, lifetime and owner; no "all outputs" bundles.
+- [ ] Packages hold only declarations shared by two or more files; each package states what it owns.
+- [ ] Top-level modules instantiate and wire; datapath logic lives in submodules.
+- [ ] Every intermediate signal and port has a reader or driver that affects an output or state.
+- [ ] One name per concept across the project; renames are separate changes.
+- [ ] Per-module answer to: what it owns, which clock, what each port group means, where internal signals are used.
